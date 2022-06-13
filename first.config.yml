@@ -7,8 +7,8 @@ common_caps:
 
 browser_caps:
   -
-    "device": "Google Pixel 3"
-    "os_version": "9.0"
+    "deviceName": "Google Pixel 3"
+    "osVersion": "9.0"
     "app": "bs://535003f0b8a8deb290e974b8f2fd32b8bfff0206"
     "name": "first_test"
     "automationName": "Appium"

@@ -10,11 +10,7 @@ CONFIG_NAME = ENV["CONFIG_NAME"] || "first"
 
 CONFIG = YAML.load(File.read(File.join(File.dirname(__FILE__), "../#{CONFIG_NAME}.config.yml")))
 
-puts CONFIG
-
 caps = CONFIG["common_caps"].merge(CONFIG["browser_caps"][TASK_ID])
-caps["browserstack.user"] = ENV["BROWSERSTACK_USERNAME"] || caps["browserstack.user"]
-caps["browserstack.key"] = ENV["BROWSERSTACK_ACCESS_KEY"] || caps["browserstack.key"]
 
 $bs_local = nil
 
@@ -22,14 +18,21 @@ if ENV["BROWSERSTACK_APP_ID"]
   caps["app"] = ENV["BROWSERSTACK_APP_ID"]
 end
 
-desired_caps = {
+caps["bstack:options"] = {
+  "userName" => ENV["BROWSERSTACK_USERNAME"],
+  "accessKey" => ENV["BROWSERSTACK_ACCESS_KEY"],
+}
+
+puts caps
+
+opts = {
   caps: caps,
   appium_lib: {
     server_url: "http://hub-cloud.browserstack.com/wd/hub",
   },
 }
 begin
-  $appium_driver = Appium::Driver.new(desired_caps, true)
+  $appium_driver = Appium::Driver.new(opts, true)
   $driver = $appium_driver.start_driver
 rescue Exception => e
   puts e.message
