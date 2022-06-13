@@ -1,7 +1,7 @@
 server: "hub-cloud.browserstack.com"
 
 common_caps:
-  "project": "First Cucumber Android Project"
+  "project": "First Cucumber Project"
   "build": "browserstack-build-1"
   "browserstack.debug": true
 
@@ -13,3 +13,9 @@ browser_caps:
     "name": "first_test"
     "automationName": "Appium"
     "platformName": "Android"
+  -
+    "deviceName": "iPhone 13 Pro Max"
+    "osVersion": "15"
+    "app": "bs://8ecad945acc79dde915b3cf1b1e4809a208916ce"
+    "name": "first_test"
+    "platformName": "iOS"
